@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - bundit-demo-robotic-forklift
+name: Build and deploy ASP.Net Core app and Angular frontend - bundit-demo-robotic-forklift
 
 on:
   push:
@@ -18,16 +18,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+          cache-dependency-path: Frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: Frontend
+        run: npm ci
+
+      - name: Build Angular app
+        working-directory: Frontend
+        run: npm run build -- --configuration production
+
+      - name: Copy Angular output into WebAPI wwwroot
+        run: |
+          mkdir -p Backend/Forklift.WebAPI/wwwroot
+          cp -r Frontend/dist/frontend/browser/. Backend/Forklift.WebAPI/wwwroot/
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build Backend/Forklift.sln --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish Backend/Forklift.WebAPI/Forklift.WebAPI.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -47,7 +67,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -61,5 +81,4 @@ jobs:
         with:
           app-name: 'bundit-demo-robotic-forklift'
           slot-name: 'Production'
-          package: .
-          
+          package: angular-dist
