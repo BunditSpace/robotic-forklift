@@ -25,6 +25,9 @@ jobs:
           cache: 'npm'
           cache-dependency-path: Frontend/package-lock.json
 
+      - name: Install npm 11.8.0
+        run: npm install -g npm@11.8.0
+
       - name: Install frontend dependencies
         working-directory: Frontend
         run: npm ci --legacy-peer-deps
