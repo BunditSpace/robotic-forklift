@@ -81,4 +81,4 @@ jobs:
         with:
           app-name: 'bundit-demo-robotic-forklift'
           slot-name: 'Production'
-          package: angular-dist
+          package: .
