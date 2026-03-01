@@ -6,7 +6,7 @@ namespace Forklift.Infrastructure.Test.Repositories;
 
 public class ForkliftRepositoryTest : IDisposable
 {
-    private SqliteConnection _connection;
+    private SqliteConnection? _connection;
 
     private DbContextOptions<global::Forklift.Infrastructure.Data.AppDbContext> CreateOptions()
     {
