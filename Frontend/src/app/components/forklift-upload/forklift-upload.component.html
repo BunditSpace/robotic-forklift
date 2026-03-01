@@ -1,0 +1,12 @@
+<div class="upload-section">
+  <input type="file" (change)="onFileSelected($event)" accept=".csv,.json" class="file-input" />
+  <button (click)="onUpload()" [disabled]="!selectedFile || isUploading" class="upload-btn">
+    {{ isUploading ? 'Uploading...' : 'Upload' }}
+  </button>
+</div>
+
+@if (message) {
+  <div class="message">
+    {{ message }}
+  </div>
+}

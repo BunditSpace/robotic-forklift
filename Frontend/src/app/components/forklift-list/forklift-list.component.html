@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Forklift List</h2>
+
+  @if (forklifts.length > 0) {
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search by name, model number, or date"
+        [value]="searchTerm"
+        (input)="onSearchInput($event)"
+      />
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Model Number</th>
+            <th>Manufacturing Date</th>
+            <th>
+              <button
+                class="delete-all-btn"
+                type="button"
+                (click)="deleteAllForklifts()"
+                [disabled]="isDeletingAll">
+                {{ isDeletingAll ? 'Deleting...' : 'Delete All' }}
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (filteredForklifts.length > 0) {
+            @for (forklift of filteredForklifts; track forklift.id) {
+              <tr>
+                <td>{{ forklift.name }}</td>
+                <td>{{ forklift.modelNumber }}</td>
+                <td>{{ forklift.manufacturingDate | date: 'yyyy-MM-dd' }}</td>
+                <td>
+                  <button
+                    class="delete-btn"
+                    type="button"
+                    (click)="deleteForklift(forklift)"
+                    [disabled]="deletingIds.has(forklift.id)">
+                    {{ deletingIds.has(forklift.id) ? 'Deleting...' : 'Delete' }}
+                  </button>
+                </td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td colspan="4" class="no-results">No matching forklift data found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="no-data">No forklift data available. Please upload a file.</div>
+  }
+
+</div>

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "no1",
+    "modelNumber": "Model-1",
+    "manufacturingDate": "2015-05-12"
+  },
+  {
+    "name": "no2",
+    "modelNumber": "Model-2",
+    "manufacturingDate": "2018-07-23"
+  },
+  {
+    "name": "no3",
+    "modelNumber": "Model-3",
+    "manufacturingDate": "2012-10-10"
+  },
+  {
+    "name": "no4",
+    "modelNumber": "Model-4",
+    "manufacturingDate": "2020-01-15"
+  },
+  {
+    "name": "no5",
+    "modelNumber": "Model-5",
+    "manufacturingDate": "2017-03-30"
+  }
+]

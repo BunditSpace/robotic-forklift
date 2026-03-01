@@ -1,0 +1,67 @@
+<div class="movement-container">
+  <h2>Forklift Movement Simulator</h2>
+
+  <div class="input-section">
+    <div class="input-group">
+      <label for="forkliftSelect">Select Forklift</label>
+      <select
+        id="forkliftSelect"
+        [(ngModel)]="selectedForkliftId"
+        (ngModelChange)="onForkliftChange()"
+        class="forklift-select"
+      >
+        <option value="" disabled>-- Select a forklift --</option>
+        @for (f of forklifts; track f.id) {
+          <option [value]="f.id">{{ f.name }} ({{ f.modelNumber }})</option>
+        }
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="commandInput">Enter Command String</label>
+      <div class="input-row">
+        <input
+          id="commandInput"
+          type="text"
+          [(ngModel)]="commandString"
+          placeholder="e.g. F10R90L90B5"
+          (keyup.enter)="parseCommand()"
+          class="command-input"
+          />
+          <button (click)="parseCommand()" class="execute-btn" [disabled]="!commandString.trim()">Execute</button>
+        </div>
+        <small class="help-text"
+          >Commands: F (Forward), B (Backward), L (Left turn), R (Right turn). Degrees must be
+          multiples of 90.</small
+          >
+        </div>
+      </div>
+
+      @if (error) {
+        <div class="error-message"> {{ error }}</div>
+      }
+
+      @if (actions.length > 0 && !error) {
+        <div class="results-section">
+          @if (selectedForklift) {
+            <div class="selected-forklift-info">
+              <span class="forklift-label">Forklift:</span>
+              <strong>{{ selectedForklift.name }}</strong>
+              <span class="forklift-meta">{{ selectedForklift.modelNumber }}</span>
+            </div>
+          }
+          <h3>Execution Steps</h3>
+          <ul class="action-list">
+            @for (action of actions; track action; let i = $index) {
+              <li
+                class="action-item"
+                [style.animation-delay]="i * 0.1 + 's'"
+                >
+                <span class="step-number">{{ i + 1 }}</span>
+                <span class="action-text">{{ action }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>

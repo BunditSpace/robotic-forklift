@@ -1,0 +1,95 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #333;
+}
+
+
+.table-container {
+    overflow-x: auto;
+}
+
+.search-container {
+    margin: 16px 0;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.no-data {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #bb2d3b;
+}
+
+.delete-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.delete-all-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    vertical-align: middle;
+}
+
+.delete-all-btn:hover {
+    background-color: #bb2d3b;
+}
+
+.delete-all-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.no-results {
+    text-align: center;
+    color: #666;
+}
