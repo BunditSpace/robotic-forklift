@@ -72,7 +72,7 @@ ehthumbs_vista.db
 .LSOverride
 
 # .NET Core
-core/
+Backend/**/core/
 project.lock.json
 project.assets.json
 *.nuget.props
