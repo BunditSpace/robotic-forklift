@@ -56,7 +56,7 @@ public class ForkliftControllerTest
         Assert.IsType<OkObjectResult>(result);
         Assert.Equal(200, (result as OkObjectResult)?.StatusCode);
         Assert.IsType<List<ForkliftDto>>((result as OkObjectResult)?.Value);
-        Assert.Empty((result as OkObjectResult)?.Value as List<ForkliftDto>);
+        Assert.Empty((result as OkObjectResult)?.Value as List<ForkliftDto> ?? []);
     }
 
     [Fact]
